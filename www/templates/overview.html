@@ -1,0 +1,13 @@
+<ion-view title="Overview">
+  <ion-content>
+    <ion-list>
+      <ion-item class="factors-list" ng-repeat="factor in factors" type="item-text-wrap" href="#tab/overview/{{factor.id}}">
+        <ul class="factor-overview">
+          <li class="factor-name">{{factor.name}}</li> 
+          <li class="factor-value">{{factor.value.slice(-1)[0]}}</li>
+          <li class="detail-link"><img src="../img/right-arrow.png" height="60px" width="60px"/></li>
+        </ul>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>
