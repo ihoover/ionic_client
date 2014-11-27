@@ -1,11 +1,17 @@
 <ion-view title="Overview">
   <ion-content>
     <ion-list>
-      <ion-item class="factors-list" ng-repeat="factor in factors" type="item-text-wrap" href="#tab/overview/{{factor.id}}">
+      <ion-item class="factors-list" ng-repeat="factor in factors" type="item-text-wrap">
         <ul class="factor-overview">
-          <li class="factor-name">{{factor.name}}</li> 
-          <li class="factor-value">{{factor.value.slice(-1)[0]}}</li>
-          <li class="detail-link"><img src="../img/right-arrow.png" height="60px" width="60px"/></li>
+          <li class="factor-name overview">{{factor.name}}</li> 
+          <li class="value-and-state overview">
+            <p class="factor-value">{{factor.overview}}</p><br/>
+            <p class=state>{{factor.device}} is {{factor.states[factor.state]}}</p></li>
+          <li class="detail-link overview">
+            <a  href="#tab/overview/{{factor.id}}">
+              <img src="../img/right-arrow.png" height="60px" width="60px"/>
+            </a>
+          </li>
         </ul>
       </ion-item>
     </ion-list>
