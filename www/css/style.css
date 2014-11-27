@@ -13,6 +13,9 @@ li.overview{
   height:100px;
   vertical-align:middle;
 }
+li.canvas{
+  text-align: center;
+}
 .value-and-state{
   text-align: center;
   width:50%;
