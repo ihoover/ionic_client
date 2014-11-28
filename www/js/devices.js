@@ -5,8 +5,38 @@ function Device(device_descriptor){
   
   this.states = ['off', 'on'];
   
+  this.date = new Date();
+  
   // 0 or 1
   this.state = device_descriptor.state;
+  
+  this._override_begin = 0;
+  this._override_duration = 0;
+  this.is_override = function() {
+    this.date = new Date();
+    return ((this.date.getTime() - this._override_begin) < (this._override_duration - 10));
+  }
+
+  this.override = function(milliseconds) {
+    // overrides for the duration specified
+    this.date = new Date();
+    this._override_begin = this.date.getTime();
+    this._override_duration = milliseconds;
+  }
+  
+  this.override_left = function() {
+    var time_left = 0;
+    this.date = new Date();
+    if (this.is_override()){
+      time_left =  (this._override_begin + this._override_duration - this.date.getTime());
+    }
+    console.log(this.id + ' ~ ' + time_left + ' ~ '+ this.date.getTime());
+    return time_left - time_left%1000;
+  }
+  
+  this.cancel_override = function() {
+    this._override_time = 0;
+  }
   
   // e.g. 'heater' or 'fan' etc
   this.name = device_descriptor.name
@@ -100,6 +130,14 @@ function override(id){
       warning.style.visibility = 'visible';
     }
     
-    // actually toggle state
-    DEVICES[id].toggle_state();
+    // actually toggle state and override
+    device = DEVICES[id];
+    device.toggle_state();
+    
+    if (device.is_override())
+      device.cancel_override();
+    else
+    {
+      device.override(1000*30);
+    }
 }

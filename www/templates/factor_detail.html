@@ -9,13 +9,23 @@
             </canvas>
           </li>
           <li class="override">
-            <div class="current-state">{{device.name}} is <span class='state-word' id='current-state-word-{{device.id}}'>{{device.states[device.state]}}</span></div>
+            <div class="current-state">
+              {{device.name}} is 
+              <span class='state-word' id='current-state-word-{{device.id}}'>
+                {{device.states[device.state]}}
+                </span>
+              </div>
             <div class="override">
               <button class='override' ng-click='override({{device.id}})'>
                 Turn {{device.name}} <span class='state-word' id='current-not-state-word-{{device.id}}'>{{device.states[1 - device.state]}}</span>
               </button>
             </div>
-            <div class='override-warning' id='override-warning-{{device.id}}'>Override lasts 1hr</div>
+            <div class='override-warning' id='override-warning-{{device.id}}'>
+              Override lasts 
+              <span id="override-duration-{{device.id}}">
+                {{device.override_left()}}
+              </span>
+            </div>
           </li>
         </ul>
       </ion-item>
