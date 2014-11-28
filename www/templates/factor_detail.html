@@ -1,20 +1,24 @@
 <ion-view title="{{factor.name}}">
   <ion-content has-header="true" padding="true">
-    <ul class="details">
-      <li class="canvas">
-        <canvas id="factor_history" width="600" height="300">
-          {{Plot(factor.value)}}
-        </canvas>
-      </li>
-      <li class="override">
-        <div class="current-state">{{factor.device}} is <span class='state-word' id='current-state-word'>{{factor.states[factor.state]}}</span></div>
-        <div class="override">
-          <button class='override' onclick='override()'>
-            Turn {{factor.device}} <span class='state-word' id='current-not-state-word'>{{factor.states[1 - factor.state]}}</span>
-          </button>
-        </div>
-        <div id='override-warning'>Override lasts 1hr.</div>
-      </li>
-    </ul>
+    <ion-list>
+      <ion-item ng-repeat="device in factor.devices()">
+        <ul class="details">
+          <li class="canvas">
+            <canvas id="value_plot_{{device.id}}" width="600" height="200" data="{{device.values}}" plot-directive>
+              <!--{{Plot(device)}}-->
+            </canvas>
+          </li>
+          <li class="override">
+            <div class="current-state">{{device.name}} is <span class='state-word' id='current-state-word-{{device.id}}'>{{device.states[device.state]}}</span></div>
+            <div class="override">
+              <button class='override' ng-click='override({{device.id}})'>
+                Turn {{device.name}} <span class='state-word' id='current-not-state-word-{{device.id}}'>{{device.states[1 - device.state]}}</span>
+              </button>
+            </div>
+            <div class='override-warning' id='override-warning-{{device.id}}'>Override lasts 1hr</div>
+          </li>
+        </ul>
+      </ion-item>
+    </ion-list>
   </ion-content>
 </ion-view>

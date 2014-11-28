@@ -70,7 +70,7 @@ div.override{
   text-align: center;
 }
 
-#override-warning{
+.override-warning{
   color: #d21400;
   font-size: 24px;
   visibility: hidden;
@@ -79,15 +79,14 @@ div.override{
 
 button.override {
   color:#111111;
-  font-size:100%;
-  padding:14px;
+  font-size:24px;
+  padding:5px;
   background-color:rgba(210,210,210,1);
   border:1px solid #888888;
   border-radius:10px;
  }
  
-button.override:hover {
+button.override:active {
   background-color:rgba(11,11,11,1);
   color:#d2d2d2;
  }
-

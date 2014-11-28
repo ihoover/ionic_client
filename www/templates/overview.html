@@ -5,8 +5,8 @@
         <ul class="factor-overview">
           <li class="factor-name overview">{{factor.name}}</li> 
           <li class="value-and-state overview">
-            <p class="factor-value">{{factor.overview}}</p><br/>
-            <p class=state>{{factor.device}} is {{factor.states[factor.state]}}</p></li>
+            <p class="factor-value">{{factor.summary()}}</p><br/>
+            <p class=state>Devices: {{factor.device_summary()}}</p></li>
           <li class="detail-link overview">
             <a  href="#tab/overview/{{factor.id}}">
               <img src="../img/right-arrow.png" height="60px" width="60px"/>
