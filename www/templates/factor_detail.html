@@ -20,10 +20,10 @@
                 Turn {{device.name}} <span class='state-word' id='current-not-state-word-{{device.id}}'>{{device.states[1 - device.state]}}</span>
               </button>
             </div>
-            <div class='override-warning' id='override-warning-{{device.id}}'>
-              Override lasts 
+            <div class='override-warning' id='override-warning-{{device.id}}' override-directive>
+              Override lasts:<br/>
               <span id="override-duration-{{device.id}}">
-                {{device.override_left()}}
+                <!--{{device.override_left()}}-->
               </span>
             </div>
           </li>

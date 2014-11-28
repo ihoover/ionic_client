@@ -1,3 +1,19 @@
+function pretty_int(int){
+  if (int < 10){
+    return '0' + int;
+  }
+  else
+    return int;
+}
+
+function pretty_time(millis){
+  
+  var hours = millis - millis % (1000*60*60);
+  var minutes = (millis - hours) - (millis - hours) % (1000*60);
+  var seconds = (millis - hours - minutes) - (millis - hours - minutes) % 1000;
+  return [pretty_int(Math.floor(hours/(1000*60*60))), pretty_int(Math.floor(minutes/(60*1000))), pretty_int(Math.floor(seconds/1000))].join(':');
+}
+
 // a device
 function Device(device_descriptor){
   
@@ -30,12 +46,21 @@ function Device(device_descriptor){
     if (this.is_override()){
       time_left =  (this._override_begin + this._override_duration - this.date.getTime());
     }
-    console.log(this.id + ' ~ ' + time_left + ' ~ '+ this.date.getTime());
-    return time_left - time_left%1000;
+    //console.log(this.id + ' ~ ' + time_left + ' ~ '+ this.date.getTime());
+    return time_left;
   }
   
   this.cancel_override = function() {
-    this._override_time = 0;
+    this._override_duration = 0;
+  }
+  
+  this.pretty_override_left = function() {
+    // return a pretty string
+    var duration = this.override_left();
+    var hours = duration - duration % (1000*60*60);
+    var minutes = (duration - hours) - (duration - hours) % (1000*60);
+    var seconds = (duration - hours - minutes) - (duration - hours - minutes) % 1000;
+    return (Math.floor(hours/(1000*60*60)) + ' H, ' + Math.floor(minutes/(60*1000))+ ' M, ' + Math.floor(seconds/1000) + ' S');
   }
   
   // e.g. 'heater' or 'fan' etc
@@ -119,25 +144,15 @@ function override(id){
     state_word.innerHTML = not_state_word.innerHTML;
     not_state_word.innerHTML = current_state;
     
-    // show warning
-    var warning = document.getElementById("override-warning-"+id);
-    if (warning.style.visibility == 'visible')
-    {
-      warning.style.visibility = 'hidden';
-    }
-    else
-    {
-      warning.style.visibility = 'visible';
-    }
-    
     // actually toggle state and override
     device = DEVICES[id];
     device.toggle_state();
     
+    console.log(device.is_override());
     if (device.is_override())
       device.cancel_override();
     else
     {
-      device.override(1000*30);
+      device.override(1000*60*2);
     }
 }
