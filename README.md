@@ -3,3 +3,7 @@
 First step:
 
     npm install -g cordova ionic
+
+To launch:
+
+    ionic serve
