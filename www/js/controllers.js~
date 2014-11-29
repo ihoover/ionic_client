@@ -22,20 +22,31 @@ angular.module('starter.controllers', [])
     for (var i = 0; i < data.length; i++)
       data[i] = Number(data[i].replace(/[\[\]]/,''));
     
-    var canvas = document.getElementById(id);
     var height = attrs.height;
     var width = attrs.width;
     var ctx = element[0].getContext("2d");
     ctx.lineWidth = 3;
     
     var x_scale = width/data.length;
+    
+    // test plot function
+    var x = {
+      data: range(data.length),
+      string: function(value){
+        return Math.round(value*100)/100;
+      }};
+    var y = {
+      data: data,
+      string: temp_to_string};
+    
+    plot(element[0], x, y);
     ctx.beginPath();
     for (var i = 0; i < data.length; i ++)
     {
       ctx.lineTo(x_scale*i,data[i]*10 - data[0]*8);
-      ctx.stroke();
       ctx.moveTo(x_scale*i, data[i]*10 - data[0]*8);
     }
+    ctx.stroke();
   }
 })
 
@@ -46,6 +57,7 @@ angular.module('starter.controllers', [])
     // exctract the ID of the device this corresponds to
     device_id = Number(attrs.id[attrs.id.length -1]);
     var duration = document.getElementById('override-duration-'+device_id);
+    
     // check if this device is being overriden
     if (DEVICES[device_id].is_override()){
       // make the warning visible
@@ -53,7 +65,7 @@ angular.module('starter.controllers', [])
       
       //update the duration
       if (duration != null){
-        duration.innerHTML = DEVICES[device_id].pretty_override_left();
+        duration.innerHTML = pretty_time(DEVICES[device_id].override_left());
       }  
     }
     

@@ -1,4 +1,5 @@
 function temp_to_string(temp){
+  temp = Math.round(temp*1)/1;
   return String(temp) + "\u2109";
 }
 
