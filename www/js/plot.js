@@ -7,7 +7,7 @@ function plot(canvas, x, y){
    *      X.string function for how to draw a data point (eg units etc)
    */
 
-  var x_label_height = 30;
+  var x_label_height = 35;
   var y_label_width = 50;
   
   var origin = {
@@ -55,7 +55,6 @@ function plot(canvas, x, y){
     
     x_pixel = origin.x + (x.data[i] - x_range[0])*x_scale;
     y_pixel = origin.y - (y.data[i] - y_range[0])*y_scale;
-    
     // draw line from last point if there was a last point
     if(old_x > 0){
       draw_line(ctx, [old_x, old_y], [x_pixel, y_pixel]);
@@ -132,7 +131,7 @@ function draw_ticks(canvas, origin, plot_size,
   ctx.strokeStyle = '#555555';
   
   // set font size
-  ctx.font = Math.floor((canvas.height - origin.y)/1.6) + "px Helvetica";
+  ctx.font = "17px Helvetica";
   
   //draw x-ticks
   var tick_length = 8;
@@ -151,7 +150,7 @@ function draw_ticks(canvas, origin, plot_size,
       //draw label
       var value = (x_pixel - origin.x)/x_scale;
       value = x.string(value);
-      ctx.fillText(value, x_pixel, canvas.height);
+      ctx.fillText(value, x_pixel, canvas.height - 5);
     }
     else
       ctx.lineWidth = 2;

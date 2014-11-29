@@ -7,7 +7,6 @@ function pretty_int(int){
 }
 
 function pretty_time(millis){
-  
   var hours = millis - millis % (1000*60*60);
   var minutes = (millis - hours) - (millis - hours) % (1000*60);
   var seconds = (millis - hours - minutes) - (millis - hours - minutes) % 1000;

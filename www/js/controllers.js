@@ -30,23 +30,18 @@ angular.module('starter.controllers', [])
     var x_scale = width/data.length;
     
     // test plot function
+    var time = new Date();
     var x = {
-      data: range(data.length),
+      data: range(time.getTime(), time.getTime() + data.length*1000*60, 1000*60),
       string: function(value){
-        return Math.round(value*100)/100;
+        return pretty_time(value)+ ' ago';
       }};
     var y = {
       data: data,
       string: temp_to_string};
-    
+    x.data.reverse();
+    console.log(pretty_time(time.getTime()));
     plot(element[0], x, y);
-    ctx.beginPath();
-    for (var i = 0; i < data.length; i ++)
-    {
-      ctx.lineTo(x_scale*i,data[i]*10 - data[0]*8);
-      ctx.moveTo(x_scale*i, data[i]*10 - data[0]*8);
-    }
-    //ctx.stroke();
   }
 })
 
