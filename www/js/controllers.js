@@ -16,6 +16,7 @@ angular.module('starter.controllers', [])
   return function(scope, element, attrs){
     var id = attrs.id;
     var data = attrs.data;
+    device_id = Number(attrs.id[attrs.id.length -1]);
     
     //turn data into array of numbers
     data = data.split(',');
@@ -38,7 +39,7 @@ angular.module('starter.controllers', [])
       }};
     var y = {
       data: data,
-      string: temp_to_string};
+      string: DEVICES[device_id].factor.string};
     x.data.reverse();
     console.log(pretty_time(time.getTime()));
     plot(element[0], x, y);

@@ -4,7 +4,7 @@ function temp_to_string(temp){
 }
 
 function hum_to_string(humidity){
-  return String(humidity) + '%';
+  return String(Math.round(humidity)) + '%';
 }
 
 function identity(value){
