@@ -65,7 +65,7 @@ function plot(canvas, x, y){
       //draw label
       var value = (x_pixel - origin.x)/x_scale;
       value = x.string(value);
-      ctx.fillText(value, x_pixel, canvas.height - 5);
+      ctx.fillText(value, x_pixel - 20, canvas.height - 5);
     }
     else
       ctx.lineWidth = 2;
