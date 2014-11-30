@@ -33,7 +33,7 @@ angular.module('starter.controllers', [])
     // test plot function
     var time = new Date();
     var x = {
-      data: range(time.getTime(), time.getTime() + data.length*1000*60, 1000*60),
+      data: range(1000*60, data.length*1000*60 , 1000*60),
       string: function(value){
         return pretty_time(value)+ ' ago';
       }};

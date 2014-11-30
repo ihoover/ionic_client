@@ -21,7 +21,7 @@ function plot(canvas, x, y){
   };
   
   // determine ranges
-  var x_accuracy = compute_accuracy(x.data, 6);
+  var x_accuracy = compute_accuracy(x.data, 12);
   var y_accuracy = compute_accuracy(y.data);
   
   // determine endpoints
@@ -63,7 +63,7 @@ function plot(canvas, x, y){
       ctx.lineWidth = 4;
       
       //draw label
-      var value = (x_pixel - origin.x)/x_scale;
+      var value = (x_pixel - origin.x)/x_scale + x_range[0];
       value = x.string(value);
       ctx.fillText(value, x_pixel - 20, canvas.height - 5);
     }
@@ -97,7 +97,7 @@ function plot(canvas, x, y){
       if(i != 0){
         ctx.strokeStyle = '#cccccc';
         ctx.lineWidth = 1;
-        draw_line(ctx, [origin.x, Math.floor(y_pixel)+.5], [canvas.width, Math.floor(y_pixel)+.5]);
+        draw_line(ctx, [origin.x+1, Math.floor(y_pixel)+.5], [canvas.width, Math.floor(y_pixel)+.5]);
         set_tick_style(ctx);
       }
       
