@@ -57,36 +57,35 @@ p.state{
 }
 
 div.current-state{
-  width: 25%;
-  font-size: 10px;
+  width: 35%;
+  font-size: 16px;
   float: left;
-  text-align: left;
+  text-align: center;
 }
 
 .state-word{
-  font-size: 18px;
+  font-size: 20px;
 }
 
 div.override{
   width: 35%;
-  font-size: 12px;
+  font-size: 16px;
   float: left;
   text-align: center;
 }
 
 div.override-warning{
   color: #d21400;
-  font-size: 12px;
+  font-size: 16px;
   visibility: hidden;
-  text-align: center;
-  width: 35%;
+  text-align: right;
+  width: 30%;
   float: right;
 
 }
 
 button.override {
   color:#111111;
-  font-size:12px;
   padding:5px;
   background-color:rgba(210,210,210,1);
   border:1px solid #888888;
@@ -97,3 +96,10 @@ button.override:active {
   background-color:rgba(11,11,11,1);
   color:#d2d2d2;
  }
+
+.detail-item {
+  padding-left: 2px;
+}
+.scroll-padding{
+  padding: 0px;
+}
