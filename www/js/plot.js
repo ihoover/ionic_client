@@ -21,7 +21,7 @@ function plot(canvas, x, y){
   };
   
   // determine ranges
-  var x_accuracy = compute_accuracy(x.data, 12);
+  var x_accuracy = compute_accuracy(x.data, 6);
   var y_accuracy = compute_accuracy(y.data);
   
   // determine endpoints
@@ -48,7 +48,7 @@ function plot(canvas, x, y){
   // calculate pixels between ticks
   num_ticks = compute_num_ticks(plot_size.x, x_accuracy, x_scale);
   console.log(num_ticks);
-  var label_freq = Math.ceil(40/(plot_size.y/num_ticks));
+  var label_freq = Math.ceil(30/(plot_size.y/num_ticks));
   var tick_length = 8;
   var begin = [];
   var end = [];

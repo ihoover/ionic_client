@@ -13,9 +13,13 @@ li.overview{
   height:100px;
   vertical-align:middle;
 }
+li.factor-name{
+	font-size: 14px;	
+}
 li.canvas{
   text-align: center;
 }
+
 .value-and-state{
   text-align: center;
   width:50%;
@@ -36,13 +40,13 @@ p.state{
 .factor-name{
   text-align: justify;
   font-size: 18px;
-  width:25%;
+  width:30%;
 }
 
 .detail-link{
   text-align: right;
   font-size: 18px;
-  width:25%;
+  width:20%;
 }
 
 .detail-list{
@@ -54,32 +58,35 @@ p.state{
 
 div.current-state{
   width: 25%;
-  font-size: 24px;
+  font-size: 10px;
   float: left;
-  text-align: center;
+  text-align: left;
 }
 
 .state-word{
-  font-size: 36px;
+  font-size: 18px;
 }
 
 div.override{
-  width: 50%;
-  font-size: 24px;
+  width: 35%;
+  font-size: 12px;
   float: left;
   text-align: center;
 }
 
-.override-warning{
+div.override-warning{
   color: #d21400;
-  font-size: 24px;
+  font-size: 12px;
   visibility: hidden;
   text-align: center;
+  width: 35%;
+  float: right;
+
 }
 
 button.override {
   color:#111111;
-  font-size:24px;
+  font-size:12px;
   padding:5px;
   background-color:rgba(210,210,210,1);
   border:1px solid #888888;

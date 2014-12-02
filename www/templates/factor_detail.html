@@ -4,12 +4,13 @@
       <ion-item ng-repeat="device in factor.devices()">
         <ul class="details">
           <li class="canvas">
-            <canvas id="value_plot_{{device.id}}" width="600" height="200" data="{{device.values}}" plot-directive>
+            <canvas id="value_plot_{{device.id}}" width="300" height="100" data="{{device.values}}" plot-directive>
               <!--{{Plot(device)}}-->
             </canvas>
           </li>
           <li class="override">
             <div class="current-state">
+              <br/>
               {{device.name}} is 
               <span class='state-word' id='current-state-word-{{device.id}}'>
                 {{device.states[device.state]}}
@@ -21,7 +22,8 @@
               </button>
             </div>
             <div class='override-warning' id='override-warning-{{device.id}}' override-directive>
-              Override lasts:<br/>
+            <br/>
+              Override:
               <span id="override-duration-{{device.id}}">
                 <!--{{device.override_left()}}-->
               </span>

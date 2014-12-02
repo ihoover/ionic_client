@@ -3,13 +3,14 @@
     <ion-list>
       <ion-item class="factors-list" ng-repeat="factor in factors" type="item-text-wrap">
         <ul class="factor-overview">
-          <li class="factor-name overview">{{factor.name}}</li> 
+          <li class="factor-name overview"><br/>{{factor.name}}</li> 
           <li class="value-and-state overview">
-            <p class="factor-value">{{factor.summary()}}</p><br/>
+            <p class="factor-value">{{factor.summary()}}</p>
             <p class=state>Devices: {{factor.device_summary()}}</p></li>
           <li class="detail-link overview">
+          <br/>
             <a  href="#tab/overview/{{factor.id}}">
-              <img src="../img/right-arrow.png" height="60px" width="60px"/>
+              <img src="../img/right-arrow.png" height="40px" width="40px"/>
             </a>
           </li>
         </ul>

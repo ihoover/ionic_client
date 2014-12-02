@@ -152,6 +152,6 @@ function override(id){
       device.cancel_override();
     else
     {
-      device.override(1000*60*2);
+      device.override(1000*60*60*2);
     }
 }
