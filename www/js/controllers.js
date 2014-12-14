@@ -22,18 +22,11 @@ angular.module('starter.controllers', [])
     data = data.split(',');
     for (var i = 0; i < data.length; i++)
       data[i] = Number(data[i].replace(/[\[\]]/,''));
-    
-    var height = attrs.height;
-    var width = attrs.width;
-    var ctx = element[0].getContext("2d");
-    ctx.lineWidth = 3;
-    
-    var x_scale = width/data.length;
-    
+
     // test plot function
     var time = new Date();
     var x = {
-      data: range(1000*60, data.length*1000*60 , 1000*60),
+      data: range(1000*60, data.length*1000*60+1, 1000*60),
       string: function(value){
         return pretty_time(value)+ ' ago';
       }};

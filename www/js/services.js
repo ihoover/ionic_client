@@ -2,7 +2,7 @@ angular.module('starter.services', [])
 
 /**
  * A service that returns the current environmental factors being measured and 
- * their current (ave. ?) value
+ * their current values
  */
  
 .factory('Factors', function() {
@@ -15,7 +15,16 @@ angular.module('starter.services', [])
     get: function(factorId) {
       // Simple index lookup
       return FACTORS[factorId];
+      
+      //get time series for this factor
+      
+      /*
+       *
+       *  PUT AJAX REQUEST HERE
+       *
+       */
     }
   }
-  
 })
+
+
