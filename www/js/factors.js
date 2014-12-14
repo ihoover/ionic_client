@@ -13,16 +13,16 @@ function identity(value){
 
 function average_latest(){
   var latest = [];
-  for(var i = 0; i < this.devices().length; i++){
+  /*for(var i = 0; i < this.devices().length; i++){
     latest.push(this.devices()[i].latest_value());
   }
   
   sum = 0;
   for(var i = 0; i < latest.length; i ++){
     sum += latest[i];
-  }
+  }*/
   
-  return this.string(sum/latest.length);
+  return this.string(this.latest_value());
 }
 
 function average_state(){
@@ -69,21 +69,46 @@ function Factor(factor_descriptor){
   
   // summary of device states
   this.device_summary = average_state;
+  
+  // data about this environmental factor
+  this.values = factor_descriptor.values;
+  
+  //update values
+  this.update = function() {
+    
+    //AJAX call instead of this line!
+    this.values.push(45);
+    
+    //update html
+    var canvas = document.getElementById("value_plot_" + this.id);
+    if (canvas != null){
+      canvas.values = this.values;
+      console.log(this.values);
+    }
+  }
+  
+  // get most recent value
+  this.latest_value = function() {
+    return this.values.slice(-1)[0];
+  }
 }
 
 var factor_descriptors = [
     { id: 0, 
       name: 'Temperature',
       string: temp_to_string,
-      summary: average_latest},
+      summary: average_latest,
+      values: [66,63,67,66,68,67,69,70,71,72,73,73,72,72]},
     { id: 1,
       name: 'Humidity',
       summary: average_latest,
-      string: hum_to_string},
+      string: hum_to_string,
+      values:  [20,19,18,18,19,18,20,21,22,23,21,24,23,24,25,23,25,26,25,27,29,28,30,31,30,30,31,32,33,33,33,32,32,31,31,32,32,33,33,34,34,34,32]},
     { id: 2,
       name: 'Soil Moisture',
       summary: average_latest,
-      string: hum_to_string},
+      string: hum_to_string,
+      values: [33,32,34,35,34,37,39,38,41,43,44,44,47,46,48,52,56]},
     { id: 3,
       name: 'Lights',
       summary: average_state,

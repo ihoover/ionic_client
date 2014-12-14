@@ -64,11 +64,6 @@ function Device(device_descriptor){
   // probably list of tuples of the form (timestamp, value)
   this.values = device_descriptor.values;
   
-  // get most recent value
-  this.latest_value = function() {
-    return this.values.slice(-1)[0];
-  }
-  
   //
   this.toggle_state = function() {
     this.state = 1 - this.state;
@@ -102,7 +97,7 @@ var device_descriptors = [
       state: 1},
     { id: 4, 
       state: 0,
-      name: 'heater 2',
+      name: 'fan',
       factor: FACTORS[0],
       values: [66,63,67,66,68,67,69,70,71,72,73,73,72,72]}
   ];

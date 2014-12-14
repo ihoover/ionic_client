@@ -13,10 +13,10 @@ angular.module('starter.controllers', [])
 })
 
 .directive('plotDirective', function(){
-  return function(scope, element, attrs){
+  var plotter = function(scope, element, attrs){
     var id = attrs.id;
     var data = attrs.data;
-    device_id = Number(attrs.id[attrs.id.length -1]);
+    factor_id = Number(attrs.id[attrs.id.length -1]);
     
     //turn data into array of numbers
     data = data.split(',');
@@ -32,11 +32,19 @@ angular.module('starter.controllers', [])
       }};
     var y = {
       data: data,
-      string: DEVICES[device_id].factor.string};
+      string: FACTORS[factor_id].string};
     x.data.reverse();
-    console.log(pretty_time(time.getTime()));
-    plot(element[0], x, y);
+    
+    if (element[0]){
+      plot(element[0], x, y);
+    }
+    // update values
+    FACTORS[factor_id].update();
+
+    //replot
+    setTimeout(function(){plotter(scope, element, attrs)}, 5000);
   }
+  return plotter;
 })
 
 .directive('overrideDirective', function(){

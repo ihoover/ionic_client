@@ -20,6 +20,9 @@ function plot(canvas, x, y){
     y: canvas.height - x_label_height
   };
   
+  var ctx = canvas.getContext("2d");  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  
   // determine ranges
   var x_accuracy = compute_accuracy(x.data, 6);
   var y_accuracy = compute_accuracy(y.data);
@@ -39,16 +42,14 @@ function plot(canvas, x, y){
    /*********************************
     * Draw the tick marks on the axes
     *********************************/
-    
-  var ctx = canvas.getContext("2d");  
-  
+
   //draw x-ticks
   set_tick_style(ctx);
   
   // calculate pixels between ticks
   num_ticks = compute_num_ticks(plot_size.x, x_accuracy, x_scale);
   console.log(num_ticks);
-  var label_freq = Math.ceil(30/(plot_size.y/num_ticks));
+  var label_freq = Math.ceil(50/(plot_size.y/num_ticks));
   var tick_length = 8;
   var begin = [];
   var end = [];
