@@ -15,18 +15,13 @@ angular.module('starter.controllers', [])
 .directive('plotDirective', function(){
   var plotter = function(scope, element, attrs){
     var id = attrs.id;
-    var data = attrs.data;
-    factor_id = Number(attrs.id[attrs.id.length -1]);
+    var factor_id = Number(attrs.id[attrs.id.length -1]);
+    var data = FACTORS[factor_id].values;
     
-    //turn data into array of numbers
-    data = data.split(',');
-    for (var i = 0; i < data.length; i++)
-      data[i] = Number(data[i].replace(/[\[\]]/,''));
-
     // test plot function
     var time = new Date();
     var x = {
-      data: range(1000*60, data.length*1000*60+1, 1000*60),
+      data: range(1000*60, data.length*1000*60*5+1, 1000*60*5),
       string: function(value){
         return pretty_time(value)+ ' ago';
       }};
@@ -35,16 +30,14 @@ angular.module('starter.controllers', [])
       string: FACTORS[factor_id].string};
     x.data.reverse();
     
-    var canvas = document.getElementById("value_plot_" + factor_id);
-    if (canvas){
-      console.log(x);
-      plot(canvas, x, y);
+    if (element[0]){
+      plot(element[0], x, y);
     }
     // update values
     FACTORS[factor_id].update();
 
     //replot
-    setTimeout(function(){plotter(scope, canvas, attrs)}, 5000);
+    setTimeout(function(){plotter(scope, element, attrs)}, 50);
   }
   return plotter;
 })

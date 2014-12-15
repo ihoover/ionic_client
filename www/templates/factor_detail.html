@@ -2,11 +2,8 @@
   <ion-content has-header="true" padding="false">
     <ion-list>
       <ion-item>
-        <li class="canvas">
-          <canvas id="value_plot_{{factor.id}}" width="300" height="150" data="{{factor.values}}" plot-directive>
-              <!--{{Plot(device)}}-->
+          <canvas id="value_plot_{{factor.id}}" width="300" height="150" data="{{factor.values}}" plot-directive>.
           </canvas>
-        </li>
       </ion-item>
       <ion-item ng-repeat="device in factor.devices()" class="detail-item">
         <ul class="details">

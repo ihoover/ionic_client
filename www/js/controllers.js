@@ -15,14 +15,9 @@ angular.module('starter.controllers', [])
 .directive('plotDirective', function(){
   var plotter = function(scope, element, attrs){
     var id = attrs.id;
-    var data = attrs.data;
-    factor_id = Number(attrs.id[attrs.id.length -1]);
+    var factor_id = Number(attrs.id[attrs.id.length -1]);
+    var data = FACTORS[factor_id].values;
     
-    //turn data into array of numbers
-    data = data.split(',');
-    for (var i = 0; i < data.length; i++)
-      data[i] = Number(data[i].replace(/[\[\]]/,''));
-
     // test plot function
     var time = new Date();
     var x = {

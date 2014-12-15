@@ -6,21 +6,20 @@ function plot(canvas, x, y){
    * x,y: X.data a numeric array
    *      X.string function for how to draw a data point (eg units etc)
    */
-
   var x_label_height = 35;
   var y_label_width = 50;
-  
+  console.log("data_length in plot", y.data.length);
   var origin = {
     x: y_label_width,
     y: canvas.height - x_label_height
   };
   
   var plot_size = {
-    x: canvas.width - y_label_width,
-    y: canvas.height - x_label_height
+    x: canvas.width - y_label_width - 20,
+    y: canvas.height - x_label_height - 20
   };
   
-  var ctx = canvas.getContext("2d");  
+  var ctx = canvas.getContext("2d");
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   
   // determine ranges
@@ -47,8 +46,9 @@ function plot(canvas, x, y){
   set_tick_style(ctx);
   
   // calculate pixels between ticks
-  num_ticks = compute_num_ticks(plot_size.x, x_accuracy, x_scale);
-  console.log(num_ticks);
+  var tick_spacing = (x_accuracy*x_scale);
+  var num_ticks =  Math.floor(plot_size.x/tick_spacing);
+  console.log("ticks: ", num_ticks);
   var label_freq = Math.ceil(50/(plot_size.y/num_ticks));
   var tick_length = 8;
   var begin = [];
@@ -57,7 +57,7 @@ function plot(canvas, x, y){
   for(var i = 0; i <= num_ticks; i++){
     
     // copmute the x value
-    x_pixel = origin.x + i*plot_size.x/num_ticks;
+    x_pixel = origin.x + i*tick_spacing;
     
     // draw label (and make stroke bigger) if appropriate
     if(mod(i,label_freq) == 0){
@@ -79,12 +79,14 @@ function plot(canvas, x, y){
   
   //draw y-ticks
   var y_pixel = 0;
-  num_ticks = compute_num_ticks(plot_size.y, y_accuracy, y_scale);
+  tick_spacing = 
+  tick_spacing = (y_accuracy*y_scale);
+  var num_ticks =  Math.floor(plot_size.y/tick_spacing);
   label_freq = Math.ceil(30/(plot_size.y/num_ticks));
   for(var i = 0; i <= num_ticks; i++){
     
     // copmute the x value
-    y_pixel = origin.y - i*plot_size.y/num_ticks;
+    y_pixel = origin.y - i*tick_spacing;
     
     // draw label (and make stroke bigger) if appropriate
     if(mod(i,label_freq) == 0){
@@ -163,7 +165,7 @@ function compute_accuracy(data, res){
     accuracy = res*Math.pow(10,Math.ceil(digits - 2));
   else
     accuracy = res;
-  console.log(accuracy);
+  console.log("accuracy: ", accuracy);
   return accuracy;
 }
 
@@ -185,6 +187,7 @@ function compute_scale(pixels, range){
 
 function compute_num_ticks(size, accuracy, scale){
   var tick_spacing = (accuracy*scale);
+  console.log("spacing: ", tick_spacing)
   return Math.floor(size/tick_spacing);
 }
 
@@ -205,12 +208,6 @@ function draw_axes(canvas, x_offset, y_offset){
             [x_offset, 0]);
 }
 
-function draw_ticks(canvas, origin, plot_size,
-                    x_range, x_scale,
-                    y_range, y_scale, x, y){
-  
-}
-
 function draw_line(ctx, begin, end){
   // just a small utility to reduce typing
   ctx.beginPath();
@@ -222,7 +219,7 @@ function draw_line(ctx, begin, end){
 function set_tick_style(ctx){
   ctx.lineWidth = 2;
   ctx.strokeStyle = '#555555';
-  ctx.font = "17px Helvetica";
+  ctx.font = "16px Helvetica";
 }
 
 function mod(x,y){

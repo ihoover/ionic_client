@@ -133,7 +133,7 @@ function override(id){
     device = DEVICES[id];
     device.toggle_state();
     
-    console.log(device.is_override());
+    console.log("override: ",device.is_override());
     if (device.is_override())
       device.cancel_override();
     else

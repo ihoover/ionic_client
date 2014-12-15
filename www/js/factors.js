@@ -83,7 +83,6 @@ function Factor(factor_descriptor){
     var canvas = document.getElementById("value_plot_" + this.id);
     if (canvas != null){
       canvas.values = this.values;
-      console.log(this.values);
     }
   }
   
@@ -108,7 +107,7 @@ var factor_descriptors = [
       name: 'Soil Moisture',
       summary: average_latest,
       string: hum_to_string,
-      values: [33,32,34,35,34,37,39,38,41,43,44,44,47,46,48,52,56]},
+      values: [33,32,34,35,34,37,39,38,41,43,44,44,47,46,48,52,56, 55]},
     { id: 3,
       name: 'Lights',
       summary: average_state,

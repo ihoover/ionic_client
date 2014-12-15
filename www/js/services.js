@@ -15,14 +15,6 @@ angular.module('starter.services', [])
     get: function(factorId) {
       // Simple index lookup
       return FACTORS[factorId];
-      
-      //get time series for this factor
-      
-      /*
-       *
-       *  PUT AJAX REQUEST HERE
-       *
-       */
     }
   }
 })
