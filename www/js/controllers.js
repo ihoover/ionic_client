@@ -7,12 +7,13 @@ angular.module('starter.controllers', [])
   $scope.factors = Factors.all();
 })
 
-.controller('FactorCtrl', function($scope, $stateParams, Factors){
+.controller('FactorCtrl', function($scope, $stateParams, Factors, $http){
   $scope.factor = Factors.get($stateParams.factorId);
+  $scope.factor.service = $http;
   $scope.override = override;
 })
 
-.directive('plotDirective', function(){
+.directive('plotDirective', function($http){
   var plotter = function(scope, element, attrs){
     var id = attrs.id;
     var factor_id = Number(attrs.id[attrs.id.length -1]);
@@ -34,7 +35,7 @@ angular.module('starter.controllers', [])
       plot(element[0], x, y);
     }
     // update values
-    FACTORS[factor_id].update();
+    FACTORS[factor_id].update($http);
 
     //replot
     setTimeout(function(){plotter(scope, element, attrs)}, 5000);

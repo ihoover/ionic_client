@@ -12,16 +12,6 @@ function identity(value){
 }
 
 function average_latest(){
-  var latest = [];
-  /*for(var i = 0; i < this.devices().length; i++){
-    latest.push(this.devices()[i].latest_value());
-  }
-  
-  sum = 0;
-  for(var i = 0; i < latest.length; i ++){
-    sum += latest[i];
-  }*/
-  
   return this.string(this.latest_value());
 }
 
@@ -74,16 +64,22 @@ function Factor(factor_descriptor){
   this.values = factor_descriptor.values;
   
   //update values
-  this.update = function() {
+  this.update = function(service) {
     
-    //AJAX call instead of this line!
-    this.values.push(45);
+    /*
+     *  This AJAX call should get the latest value for this factor
+     *
+     */
+
+    YQI = escape("select * from yahoo.finance.quotes where symbol in ('AAPL','GOOG','MSFT')");
+    callback="requestComplete";
+    URL = "http://query.yahooapis.com/v1/public/yql?q=" + YQI +      "&format=json&env=http://datatables.org/alltables.env&callback=" + callback;
+    service.get(URL)
+    .success(function(data, status, headers, config) {console.log("response", data.query)});
     
-    //update html
-    var canvas = document.getElementById("value_plot_" + this.id);
-    if (canvas != null){
-      canvas.values = this.values;
-    }
+    // update the values with the latest
+    this.values.push(60);
+
   }
   
   // get most recent value
