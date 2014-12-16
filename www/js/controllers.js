@@ -22,13 +22,21 @@ angular.module('starter.controllers', [])
     // test plot function
     var time = new Date();
     var x = {
-      data: range(1000*60, data.length*1000*60+1, 1000*60),
+      data: [],
       string: function(value){
         return pretty_time(value)+ ' ago';
       }};
     var y = {
-      data: data,
+      data: [],
       string: FACTORS[factor_id].string};
+    
+    for (var i = 0; i < data.length; i++){
+      x.data.push(time.getTime() - data[i][0]);
+      console.log('now', time.getTime());
+      console.log(data[i][0]);
+      y.data.push(data[i][1]);
+    }
+    console.log(x.data);
     x.data.reverse();
     
     if (element[0]){

@@ -157,15 +157,19 @@ function compute_accuracy(data, res){
   
   var max_value = Math.max.apply(null, data);
   var min_value = Math.min.apply(null, data);
-  var digits = Math.ceil(Math.log(max_value - min_value)/Math.log(10));
+  var accuracy = res;
+  if (max_value != min_value){
+    
   
-  // the accuracy should scale with the number of digits
-  var accuracy = 1;
-  if(digits != 1)
-    accuracy = res*Math.pow(10,Math.ceil(digits - 2));
-  else
-    accuracy = res;
-  console.log("accuracy: ", accuracy);
+    var digits = Math.ceil(Math.log(max_value - min_value)/Math.log(10));
+  
+    // the accuracy should scale with the number of digit
+    if(digits != 1)
+      accuracy = res*Math.pow(10,Math.ceil(digits - 2));
+    else
+      accuracy = res;
+  }
+  console.log("accuracy: ", accuracy, '-', digits);
   return accuracy;
 }
 
@@ -175,9 +179,16 @@ function compute_range(accuracy, data){
   var end_data = Math.max.apply(null, data);
   var first_data = Math.min.apply(null, data);
   
-  var end_point = end_data + mod(-end_data, accuracy);
-  var first_point = first_data - mod(first_data, accuracy);
-  
+  var first_point;
+  var end_point;
+  if(end_data == first_data){
+    end_point = end_data + accuracy;
+    first_point = first_data - accuracy;    
+  }
+  else{
+    end_point = end_data + mod(-end_data, accuracy);
+    first_point = first_data - mod(first_data, accuracy);
+  }
   return [first_point, end_point];
 }
 

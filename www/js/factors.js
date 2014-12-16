@@ -72,13 +72,14 @@ function Factor(factor_descriptor){
      */
 
     YQI = escape("select * from yahoo.finance.quotes where symbol in ('AAPL','GOOG','MSFT')");
-    callback="requestComplete";
-    URL = "http://query.yahooapis.com/v1/public/yql?q=" + YQI +      "&format=json&env=http://datatables.org/alltables.env&callback=" + callback;
+    URL = "http://query.yahooapis.com/v1/public/yql?q=" + YQI +      "&format=json&env=http://datatables.org/alltables.env&callback=";// + callback;
     service.get(URL)
-    .success(function(data, status, headers, config) {console.log("response", data.query)});
+    .success(function(data, status, headers, config) {console.log("response", data.query.results.quote[0].symbol)});
     
     // update the values with the latest
-    this.values.push(60);
+    var time = new Date();
+    this.values.push([time.getTime(), 60]);
+    
 
   }
   
@@ -93,17 +94,17 @@ var factor_descriptors = [
       name: 'Temperature',
       string: temp_to_string,
       summary: average_latest,
-      values: [66,63,67,66,68,67,69,70,71,72,73,73,72,72]},
+      values: [[1418691930277, 66]]},
     { id: 1,
       name: 'Humidity',
       summary: average_latest,
       string: hum_to_string,
-      values:  [20,19,18,18,19,18,20,21,22,23,21,24,23,24,25,23,25,26,25,27,29,28,30,31,30,30,31,32,33,33,33,32,32,31,31,32,32,33,33,34,34,34,32]},
+      values:  [[1418691930277, 66]]},
     { id: 2,
       name: 'Soil Moisture',
       summary: average_latest,
       string: hum_to_string,
-      values: [33,32,34,35,34,37,39,38,41,43,44,44,47,46,48,52,56, 55]},
+      values: []},
     { id: 3,
       name: 'Lights',
       summary: average_state,
