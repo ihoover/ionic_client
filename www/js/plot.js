@@ -8,7 +8,6 @@ function plot(canvas, x, y){
    */
   var x_label_height = 35;
   var y_label_width = 50;
-  console.log("data_length in plot", y.data.length);
   var origin = {
     x: y_label_width,
     y: canvas.height - x_label_height
@@ -48,7 +47,7 @@ function plot(canvas, x, y){
   // calculate pixels between ticks
   var tick_spacing = (x_accuracy*x_scale);
   var num_ticks =  Math.floor(plot_size.x/tick_spacing);
-  console.log("ticks: ", num_ticks);
+  //console.log("ticks: ", num_ticks);
   var label_freq = Math.ceil(50/(plot_size.y/num_ticks));
   var tick_length = 8;
   var begin = [];
@@ -169,7 +168,7 @@ function compute_accuracy(data, res){
     else
       accuracy = res;
   }
-  console.log("accuracy: ", accuracy, '-', digits);
+  //console.log("accuracy: ", accuracy, '-', digits);
   return accuracy;
 }
 
@@ -198,7 +197,6 @@ function compute_scale(pixels, range){
 
 function compute_num_ticks(size, accuracy, scale){
   var tick_spacing = (accuracy*scale);
-  console.log("spacing: ", tick_spacing)
   return Math.floor(size/tick_spacing);
 }
 

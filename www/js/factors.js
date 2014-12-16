@@ -39,6 +39,9 @@ function Factor(factor_descriptor){
   // unique etc.
   this.id = factor_descriptor.id;
   
+  // used to mark which recursive chain it belongs in
+  this.chain = 0;
+  
   // function for appending the right symbol for the units
   this.string = factor_descriptor.string;
   
@@ -74,18 +77,24 @@ function Factor(factor_descriptor){
     YQI = escape("select * from yahoo.finance.quotes where symbol in ('AAPL','GOOG','MSFT')");
     URL = "http://query.yahooapis.com/v1/public/yql?q=" + YQI +      "&format=json&env=http://datatables.org/alltables.env&callback=";// + callback;
     service.get(URL)
-    .success(function(data, status, headers, config) {console.log("response", data.query.results.quote[0].symbol)});
+    .success(function(data, status, headers, config) {
+      //console.log("response", data.query.results.quote[0].symbol)
+    });
     
     // update the values with the latest
     var time = new Date();
-    this.values.push([time.getTime(), 60+Math.sin(time.getTime()/1000)+5*Math.sin(time.getTime()/10000)+ 10*Math.sin(time.getTime()/20000)]);
-    
+    this.values.push([time.getTime(), 60+Math.sin(time.getTime()/1000)+5*Math.sin(time.getTime()/10000)+ this.id*10*Math.sin(time.getTime()/20000)]);
 
   }
   
   // get most recent value
   this.latest_value = function() {
-    return this.values.slice(-1)[0][1];
+    if (this.values.length > 0){
+      return this.values.slice(-1)[0][1];
+    }
+    else {
+      return NaN;
+    }
   }
 }
 

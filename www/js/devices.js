@@ -44,12 +44,13 @@ function Device(device_descriptor){
      * This AJAX should toggle the device state
      *  Use this.outlet_name to address the right outlet
      *  (this.outlet_name defined in the descriptors in this document
+     * Probably need to do service.post.
      */
     YQI = escape("select * from yahoo.finance.quotes where symbol in ('AAPL','GOOG','MSFT')");
-    callback="requestComplete";
-    URL = "http://query.yahooapis.com/v1/public/yql?q=" + YQI +      "&format=json&env=http://datatables.org/alltables.env&callback=" + callback;
+    URL = "http://query.yahooapis.com/v1/public/yql?q=" + YQI +      "&format=json&env=http://datatables.org/alltables.env&callback=";
     this.factor.service.get(URL)
-    .success(function(data, status, headers, config) {console.log("response", data);  
+    .success(function(data, status, headers, config) {
+    //console.log("response", data);  
     
     // keep track of the state
     this.state = 1 - this.state;});
@@ -76,10 +77,6 @@ function Device(device_descriptor){
   // the envoronmental fector controlled by this device  (temperature, humidity etc.)
   this.factor = device_descriptor.factor;
   
-  // the sensor measurements associated with this device
-  // probably list of tuples of the form (timestamp, value)
-  this.values = device_descriptor.values;
-  
   //
   this.toggle_state = function() {
     this.state = 1 - this.state;
@@ -95,31 +92,26 @@ var device_descriptors = [
       state: 1,
       name: 'heater',
       factor: FACTORS[0],
-      values: [58,58,57,56,58,57,59,60,61,62,63,63,62,62],
       outlet_name: 0},
     { id: 1,
       state: 0,
       name: 'mister',
       factor: FACTORS[1],
-      values: [20,19,18,18,19,18,20,21,22,23,21,24,23,24,25,23,25,26,25,27,29,28,30,31,30,30,31,32,33,33,33,32,32,31,31,32,32,33,33,34,34,34,32],
       outlet_name: 1},
     { id: 2,
       name: 'irrigator',
       factor: FACTORS[2],
-      values: [33,32,34,35,34,37,39,38,41,43,44,44,47,46,48,52,56],
       state: 1,
       outlet_name: 2},
     { id: 3,
       name: 'lights',
       factor: FACTORS[3],
-      values: ['off', 'on'],
       state: 1,
       outlet_name: 3},
     { id: 4, 
       state: 0,
       name: 'fan',
       factor: FACTORS[0],
-      values: [66,63,67,66,68,67,69,70,71,72,73,73,72,72],
       outlet_name: 4}
   ];
 
