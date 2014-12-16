@@ -37,7 +37,7 @@ angular.module('starter.controllers', [])
       y.data.push(data[i][1]);
     }
     console.log(x.data);
-    x.data.reverse();
+    //x.data.reverse();
     
     if (element[0]){
       plot(element[0], x, y);

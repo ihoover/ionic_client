@@ -78,14 +78,14 @@ function Factor(factor_descriptor){
     
     // update the values with the latest
     var time = new Date();
-    this.values.push([time.getTime(), 60]);
+    this.values.push([time.getTime(), 60+Math.sin(time.getTime()/1000)+5*Math.sin(time.getTime()/10000)+ 10*Math.sin(time.getTime()/20000)]);
     
 
   }
   
   // get most recent value
   this.latest_value = function() {
-    return this.values.slice(-1)[0];
+    return this.values.slice(-1)[0][1];
   }
 }
 

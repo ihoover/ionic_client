@@ -32,7 +32,7 @@ angular.module('starter.controllers', [])
     
     for (var i = 0; i < data.length; i++){
       x.data.push(time.getTime() - data[i][0]);
-      console.log(time.getTime());
+      console.log('now', time.getTime());
       console.log(data[i][0]);
       y.data.push(data[i][1]);
     }
