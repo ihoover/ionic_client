@@ -181,7 +181,7 @@ function compute_range(accuracy, data){
   
   var first_point;
   var end_point;
-  if(end_data == first_data){
+  if(Math.abs(end_data - first_data)<accuracy){
     end_point = end_data + accuracy;
     first_point = first_data - accuracy;    
   }
