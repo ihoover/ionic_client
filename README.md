@@ -11,10 +11,10 @@ To launch:
 To compile for native is a multi-step process
 - make sure android sdk is installed
 - install ant
-- add
+- add to .bashrc
 
-    export ANDROID_HOME=/home/[username]/Android/Sdk
-    export PATH=$ANDROID_HOME/tools:$PATH
-    export PATH=$ANDROID_HOME/platform-tools:$PATH
-    
-  to .bashrc
+        export ANDROID_HOME=/home/[username]/Android/Sdk
+        export PATH=$ANDROID_HOME/tools:$PATH
+        export PATH=$ANDROID_HOME/platform-tools:$PATH
+
+- run `ionic platform add android` 
