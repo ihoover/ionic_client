@@ -24,7 +24,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
 .run(function($http, Update) {
     Update.all();
-    setInterval(Update.all, 10000);
+    setInterval(Update.all, 30000);
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
