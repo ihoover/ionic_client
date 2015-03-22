@@ -13,21 +13,18 @@ angular.module('starter.controllers', [])
   $scope.override = override;
 })
 
+// this directive ensures that plotting happens on the load of the details page
 .directive('plotDirective', function($http){
-  var plotter = function(scope, element, attrs, chain_id){
+  var plotter = function(scope, element, attrs){
     var id = attrs.id;
-    if (chain_id == null){
-      chain_id = 0;
-    }
     
     var factor_id = Number(attrs.id[attrs.id.length -1]);
     var factor = FACTORS[factor_id];
     var data = factor.values;
     
-    // only proceed if this chain hasn't been started already
     
-      
-    // test plot function
+    // This is all repeated code with the update service :(  Needs cleaning up.
+    
     var time = new Date();
     
     var x = {
@@ -52,16 +49,6 @@ angular.module('starter.controllers', [])
     }
     else{
       plot(element[0], x,y);
-    }
-    
-    // this means that the recursive calling will only be triggered once
-    if (chain_id == factor.chain) {
-      factor.chain = time.getTime();
-      // update values
-      FACTORS[factor_id].update($http);
-  
-      //replot
-      setTimeout(function(){plotter(scope, element, attrs, factor.chain)}, 5000);
     }
   }
   return plotter;

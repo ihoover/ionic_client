@@ -17,4 +17,10 @@ To compile for native is a multi-step process
         export PATH=$ANDROID_HOME/tools:$PATH
         export PATH=$ANDROID_HOME/platform-tools:$PATH
 
-- run `ionic platform add android` 
+- execute the following commands
+
+        ionic platform add android
+        ionic build android
+
+- to run on a device simply connect android phone and execute `ionic run android` 
+        

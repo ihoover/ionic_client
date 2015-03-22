@@ -117,6 +117,7 @@ var factor_descriptors = [
     { id: 3,
       name: 'Lights',
       summary: average_state,
+      values:[],
       string: identity}
   ];
 

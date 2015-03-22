@@ -19,6 +19,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       StatusBar.styleDefault();
     }
   });
+
+})
+
+.run(function($http, Update) {
+    Update.all();
+    setInterval(Update.all, 10000);
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
@@ -72,4 +78,5 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   $urlRouterProvider.otherwise('/tab/overview');
 
 });
+console.log("hello earthling");
 
